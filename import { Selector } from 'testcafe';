@@ -1,0 +1,36 @@
+import { Selector } from 'testcafe';
+
+fixture `Postings_Homepage_Map`
+    .page `https://elm-stage.govdocs.com/#/`
+    .beforeEach(async t => {
+        await t
+            .click(Selector('#app').find('.mui195.mui180').nth(0))
+            .pressKey('shift')
+            .typeText(Selector('#app').find('.mui195.mui180').nth(0), 'annie.admin@govdocs.com')
+            .typeText(Selector('#app').find('.mui195.mui180.mui198.mui183'), 'AnAd0521@@')
+            .click(Selector('#app').find('span').withText('Log In'))
+            .typeText(Selector('#app').find('.mui340.mui325'), 'GD Rest')
+            .click(Selector('#company-select-list').find('li').withText('GD Restaurant Group HQ'))
+            .click(Selector('#app').find('span').withText('Continue'));
+    })
+    .afterEach(async t => {
+        await t
+            .click(Selector('header').find('div').withText('Annie').nth(5))
+            .click(Selector('li').withText('Logout'));
+    });
+
+test('dropdown_countries_in_map', async t => {
+    await t
+        .click(Selector('#app').find('button').withText('United States'))
+        .click(Selector('li').withText('United States'))
+        .click(Selector('#app').find('span').withText('United States'))
+        .click(Selector('li').withText('Canada'))
+        .click(Selector('#app').find('button').withText('Canada'))
+        .click(Selector('li').withText('Virgin Islands'))
+        .click(Selector('#app').find('span').withText('Virgin Islands'))
+        .click(Selector('li').withText('Puerto Rico'))
+        .click(Selector('#app').find('span').withText('Puerto Rico'))
+        .click(Selector('li').withText('Guam'))
+        .click(Selector('#app').find('span').withText('Guam'))
+        .click(Selector('li').withText('United States'));
+});
